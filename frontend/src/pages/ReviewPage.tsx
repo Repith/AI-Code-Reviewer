@@ -9,7 +9,7 @@ import CodeEditor from '../components/code/CodeEditor';
 function ReviewContent() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { language, setLanguage, isLoading, submitReview } = useCodeReview();
+  const { isLoading, submitReview } = useCodeReview();
 
   const handleSubmit = async () => {
     if (!user) {
@@ -34,48 +34,33 @@ function ReviewContent() {
   }
 
   return (
-    <div className="flex flex-col gap-6 md:flex-row">
-      {/* Left Column - Code Input */}
-      <div className="w-full md:w-1/2">
-        <div className="flex items-center justify-between mb-2">
-          <label className="font-medium">
-            Programming Language:
-            <select
-              value={language}
-              onChange={e => setLanguage(e.target.value as 'javascript' | 'typescript')}
-              className="p-2 ml-2 border rounded"
-              disabled={isLoading}
-            >
-              <option value="javascript">JavaScript</option>
-              <option value="typescript">TypeScript</option>
-            </select>
-          </label>
-
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className={clsx(
-              'px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600',
-              'disabled:bg-blue-300 transition-colors duration-200'
-            )}
-          >
-            {isLoading ? 'Analyzing...' : 'Get Review'}
-          </button>
+    <div className="flex flex-col w-full gap-2">
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="w-full md:w-1/2">
+          <h2 className="mb-4 text-xl font-semibold">Your Code:</h2>
+          <CodeEditor disabled={isLoading} />
         </div>
 
-        <div>
-          <label className="block mb-2 font-medium">Your Code:</label>
-          <CodeEditor disabled={isLoading} />
+        <div className="w-full md:w-1/2">
+          <div className="sticky top-4">
+            <h2 className="mb-4 text-xl font-semibold">Feedback</h2>
+            <CodeFeedback />
+          </div>
         </div>
       </div>
 
-      {/* Right Column - Feedback */}
-      <div className="w-full md:w-1/2">
-        <div className="sticky top-4">
-          <h2 className="mb-4 text-xl font-semibold">Feedback</h2>
-          <CodeFeedback />
-        </div>
+      <div className="flex items-center justify-between w-full ">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={isLoading}
+          className={clsx(
+            'px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600',
+            'disabled:bg-blue-300 transition-colors duration-200'
+          )}
+        >
+          {isLoading ? 'Analyzing...' : 'Get Review'}
+        </button>
       </div>
     </div>
   );
@@ -85,7 +70,6 @@ export default function ReviewPage() {
   return (
     <CodeReviewProvider>
       <div className="container p-4 mx-auto max-w-7xl">
-        <h1 className="mb-6 text-2xl font-bold">AI Code Review</h1>
         <ReviewContent />
       </div>
     </CodeReviewProvider>
