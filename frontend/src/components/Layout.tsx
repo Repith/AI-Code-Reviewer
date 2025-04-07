@@ -12,7 +12,7 @@ export default function Layout() {
         'flex flex-col min-h-screen',
         theme === 'light'
           ? 'bg-gradient-to-br from-white via-purple-50 to-white'
-          : 'bg-gradient-to-br from-slate-950 via-purple-950/30 to-slate-950'
+          : 'bg-gradient-to-br from-slate-950 via-purple-950/90 to-slate-950'
       )}
     >
       <Navbar />

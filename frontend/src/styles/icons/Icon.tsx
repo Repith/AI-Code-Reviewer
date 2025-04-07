@@ -1,6 +1,7 @@
 import { AvailabilityIcon } from './AvailabilityIcon';
 import { BugIcon } from './BugIcon';
 import { CloseIcon } from './CloseIcon';
+import { BrainCircuitIcon } from './BrainCircuitIcon';
 import { MenuIcon } from './MenuIcon';
 import { MoonIcon } from './MoonIcon';
 import { SunIcon } from './SunIcon';
@@ -16,6 +17,7 @@ const iconComponents = {
   time: TimeIcon,
   bug: BugIcon,
   availability: AvailabilityIcon,
+  brainCircuit: BrainCircuitIcon,
 } as const;
 
 export type IconName = keyof typeof iconComponents;

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import HomePage from './pages/HomePage';
@@ -9,13 +8,14 @@ import RegisterPage from './pages/RegisterPage';
 import HistoryPage from './pages/HistoryPage';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ToasterWrapper from './components/common/ToasterWrapper';
 
 function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
         <BrowserRouter>
-          <Toaster position="top-right" />
+          <ToasterWrapper />
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
