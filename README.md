@@ -2,27 +2,47 @@
 
 An AI-powered application that provides instant code reviews and feedback for your JavaScript and TypeScript code.
 
+![AI Code Reviewer](frontend/public/screenshots/shot_1.png)
+
 ## Features
 
 - AI-powered code analysis and feedback
 - Support for JavaScript and TypeScript
-- User authentication system
+- User authentication with JWT
 - Review history tracking
 - Real-time streaming feedback
+- Dark/light theme support
+- Responsive design
+
+## Screenshots
+
+<div align="center">
+  <img src="frontend/public/screenshots/shot_2.png" alt="Code Review" width="45%" />
+  <img src="frontend/public/screenshots/shot_3.png" alt="Review History" width="45%" />
+</div>
+
+<div align="center">
+  <img src="frontend/public/screenshots/shot_4.png" alt="Login Page" width="45%" />
+  <img src="frontend/public/screenshots/shot_5.png" alt="Dark Mode" width="45%" />
+</div>
 
 ## Tech Stack
 
 ### Backend
-- NestJS framework
-- MongoDB database
+- NestJS framework (v10.4+)
+- MongoDB with Mongoose ODM
 - OpenAI API integration
 - JWT authentication
+- CQRS pattern support
 
 ### Frontend
-- React with TypeScript
-- Tailwind CSS for styling
-- React Router for navigation
+- React 19 with TypeScript
+- Tailwind CSS 4 for styling
+- React Router v7 for navigation
 - Axios for API requests
+- React Hook Form for form handling
+- React Markdown for rendering feedback
+- Framer Motion for animations
 
 ## Getting Started
 
@@ -35,7 +55,7 @@ An AI-powered application that provides instant code reviews and feedback for yo
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ai-code-reviewer.git
+git clone https://github.com/Repith/ai-code-reviewer.git
 cd ai-code-reviewer
 ```
 
@@ -69,24 +89,37 @@ You can also run the application using Docker:
 docker-compose up
 ```
 
+This will start:
+- MongoDB container on port 27017
+- Backend container on port 3000
+- Frontend container on port 3001
+
 ## Project Structure
 
 ```
 ai-code-reviewer/
-├── backend/             # NestJS backend
+├── backend/                # NestJS backend
 │   ├── src/
-│   │   ├── config/      # Configuration files
-│   │   ├── modules/     # Feature modules
-│   │   └── main.ts      # Application entry point
-│   └── Dockerfile
-├── frontend/            # React frontend
+│   │   ├── config/         # Configuration files
+│   │   ├── modules/        # Feature modules
+│   │   │   ├── auth/       # Authentication module
+│   │   │   ├── review/     # Code review module
+│   │   │   └── user/       # User management module
+│   │   └── main.ts         # Application entry point
+│   ├── Dockerfile          # Backend Docker configuration
+│   └── package.json        # Backend dependencies
+├── frontend/               # React frontend
+│   ├── public/             # Static assets
+│   │   └── screenshots/    # Application screenshots
 │   ├── src/
-│   │   ├── components/  # React components
-│   │   ├── contexts/    # React contexts
-│   │   ├── pages/       # Page components
-│   │   └── services/    # API services
-│   └── Dockerfile
-└── docker-compose.yml   # Docker configuration
+│   │   ├── components/     # React components
+│   │   ├── contexts/       # React contexts (Auth, Theme)
+│   │   ├── pages/          # Page components
+│   │   └── services/       # API services
+│   ├── Dockerfile          # Frontend Docker configuration
+│   └── package.json        # Frontend dependencies
+├── docker-compose.yml      # Docker configuration
+└── package.json            # Root package.json for scripts
 ```
 
 ## Development
@@ -95,6 +128,15 @@ ai-code-reviewer/
 - Frontend development server: `npm run start:frontend`
 - Lint code: `npm run lint`
 - Format code: `npm run format`
+- Update dependencies: `npm run update-deps`
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
