@@ -1,25 +1,25 @@
 import { useTheme } from '@/contexts/ThemeContext';
-import { Icons, IconName } from '@/styles/icons/Icon';
+import { Icons } from '@/styles/icons/Icon';
 import clsx from 'clsx';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
-  const getIconName = (): IconName => (theme === 'light' ? 'sun' : 'moon');
-
   return (
     <button
       onClick={toggleTheme}
       className={clsx(
-        'p-1.5 rounded-full transition-colors',
-        'bg-white/90 dark:bg-slate-800/90',
-        'text-amber-500 dark:text-indigo-400',
-        'hover:bg-white hover:shadow-sm dark:hover:bg-slate-700',
-        'ring-1 ring-slate-200 dark:ring-slate-700'
+        'p-2 rounded-full',
+        theme === 'light'
+          ? 'text-purple-800 hover:bg-purple-100'
+          : 'text-purple-200 hover:bg-purple-800/30',
+        'transition-colors duration-200',
+        'focus:outline-none focus:ring-2',
+        theme === 'light' ? 'focus:ring-purple-500/50' : 'focus:ring-purple-400/50'
       )}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      <Icons name={getIconName()} className="w-4 h-4" />
+      <Icons name={theme === 'dark' ? 'sun' : 'moon'} className="w-5 h-5" />
     </button>
   );
 }

@@ -13,7 +13,7 @@ interface CodeFeedbackProps {
 }
 
 const containerClasses = clsx(
-  'h-[70dvh] flex flex-col overflow-hidden rounded-lg shadow-md',
+  'h-[80dvh] flex flex-col overflow-hidden rounded-lg shadow-md',
   'border border-zinc-300 dark:border-zinc-700',
   'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50',
   'transition-all duration-200'

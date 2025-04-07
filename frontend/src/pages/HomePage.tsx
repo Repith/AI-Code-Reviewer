@@ -1,16 +1,26 @@
+import { useTheme } from '@/contexts/ThemeContext';
+import clsx from 'clsx';
+import HeroSection from '@/components/home/HeroSection';
+import CodeExampleSection from '@/components/code/CodeExampleSection';
+import StatsSection from '@/components/home/StatsSection';
+import CtaSection from '@/components/home/CtaSection';
+
 export default function HomePage() {
+  const { theme } = useTheme();
+
   return (
-    <div className="container p-4 mx-auto">
-      <h1 className="mb-4 text-2xl font-bold">Welcome to AI Code Reviewer</h1>
-      <p className="mb-4">Get instant feedback on your code from our AI assistant.</p>
-      <div className="flex gap-4">
-        <a href="/review" className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
-          Try Code Review
-        </a>
-        <a href="/login" className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-          Login
-        </a>
-      </div>
+    <div
+      className={clsx(
+        'min-h-[calc(100vh-4rem)]',
+        theme === 'light'
+          ? 'bg-gradient-to-br from-purple-300/30 via-white to-purple-200'
+          : 'bg-gradient-to-br from-slate-950 via-purple-950/80 to-slate-950'
+      )}
+    >
+      <HeroSection />
+      <CodeExampleSection />
+      <StatsSection />
+      <CtaSection />
     </div>
   );
 }

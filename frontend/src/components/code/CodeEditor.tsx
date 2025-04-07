@@ -129,7 +129,7 @@ export default function CodeEditor({
   return (
     <div
       className={clsx(
-        'rounded-md shadow-md h-[70dvh] flex flex-col',
+        'rounded-md shadow-md h-[80dvh] flex flex-col',
         'border border-zinc-300 dark:border-zinc-700',
         'bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50',
         'transition-all duration-200'

@@ -5,11 +5,13 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { CodeReviewProvider, useCodeReview } from '../contexts/CodeReviewContext';
 import CodeEditor from '../components/code/CodeEditor';
+import GetReviewButton from '@/components/common/GetReviewButton';
 
 function ReviewContent() {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { isLoading, submitReview } = useCodeReview();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (!user) {
@@ -21,46 +23,35 @@ function ReviewContent() {
 
   if (!user) {
     return (
-      <div className="p-4 mb-4 text-center bg-yellow-100 rounded-md">
-        <p className="text-yellow-800">You need to be logged in to use the code review feature.</p>
-        <button
-          className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-          onClick={() => navigate('/login')}
-        >
-          Log In
-        </button>
+      <div
+        className={clsx(
+          'p-4 mb-4 text-center rounded-md',
+          'dark:bg-amber-900/30 dark:text-amber-200',
+          'bg-yellow-100 text-yellow-800'
+        )}
+      >
+        <p>You need to be logged in to use the code review feature.</p>
+        <GetReviewButton onClick={() => navigate('/login')}>Log In</GetReviewButton>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col w-full gap-2">
-      <div className="flex flex-col gap-6 md:flex-row">
-        <div className="w-full md:w-1/2">
-          <h2 className="mb-4 text-xl font-semibold">Your Code:</h2>
+      <div className="flex flex-col gap-4 md:flex-row">
+        <div className="w-full md:grow md:max-w-[38dvw]">
           <CodeEditor disabled={isLoading} />
         </div>
 
-        <div className="w-full md:w-1/2">
-          <div className="sticky top-4">
-            <h2 className="mb-4 text-xl font-semibold">Feedback</h2>
-            <CodeFeedback />
-          </div>
+        <div className="flex items-center justify-between">
+          <GetReviewButton onClick={handleSubmit} isLoading={isLoading} loadingText="Analyzing...">
+            Get Review
+          </GetReviewButton>
         </div>
-      </div>
 
-      <div className="flex items-center justify-between w-full ">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={isLoading}
-          className={clsx(
-            'px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600',
-            'disabled:bg-blue-300 transition-colors duration-200'
-          )}
-        >
-          {isLoading ? 'Analyzing...' : 'Get Review'}
-        </button>
+        <div className="w-full md:grow md:max-w-[38dvw]">
+          <CodeFeedback />
+        </div>
       </div>
     </div>
   );
