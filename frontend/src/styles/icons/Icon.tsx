@@ -7,6 +7,12 @@ import { MoonIcon } from './MoonIcon';
 import { SunIcon } from './SunIcon';
 import { SystemIcon } from './SystemIcon';
 import { TimeIcon } from './TimeIcon';
+import { LoadingIcon } from './LoadingIcon';
+import { EmptyIcon } from './EmptyIcon';
+import { CodeIcon } from './CodeIcon';
+import { ChevronDownIcon } from './ChevronDownIcon';
+import { ChevronUpIcon } from './ChevronUpIcon';
+import { DoorArrowLeft } from './DoorArrowLeft';
 
 const iconComponents = {
   sun: SunIcon,
@@ -18,6 +24,12 @@ const iconComponents = {
   bug: BugIcon,
   availability: AvailabilityIcon,
   brainCircuit: BrainCircuitIcon,
+  loading: LoadingIcon,
+  empty: EmptyIcon,
+  code: CodeIcon,
+  chevronDown: ChevronDownIcon,
+  chevronUp: ChevronUpIcon,
+  doorArrowLeft: DoorArrowLeft,
 } as const;
 
 export type IconName = keyof typeof iconComponents;

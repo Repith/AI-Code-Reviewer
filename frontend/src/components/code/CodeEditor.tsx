@@ -99,19 +99,19 @@ export default function CodeEditor({
 
   const headerClasses = clsx(
     'flex items-center justify-between px-4 py-2 rounded-t-lg',
-    'bg-zinc-200 dark:bg-zinc-900 border-b border-zinc-300 dark:border-zinc-800',
+    'bg-slate-200 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800',
     'h-10'
   );
 
   const wrapperClasses = clsx(
     'relative flex-grow overflow-hidden rounded-b-lg',
-    theme === 'dark' ? 'bg-zinc-800' : 'bg-[#f8f8f8]'
+    theme === 'dark' ? 'bg-slate-800' : 'bg-[#f8f8f8]'
   );
 
   const preClasses = clsx(
     'absolute top-0 left-0 w-full h-full pointer-events-none line-numbers',
     `prism-${theme}`,
-    'scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700',
+    'scrollbar-thin scrollbar-thumb-slate-400 dark:scrollbar-thumb-slate-700',
     'scrollbar-track-transparent'
   );
 
@@ -121,7 +121,7 @@ export default function CodeEditor({
     'bg-transparent resize-none',
     'caret-black dark:caret-white',
     'focus:outline-none focus:ring-0',
-    'scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700',
+    'scrollbar-thin scrollbar-thumb-slate-400 dark:scrollbar-thumb-slate-700',
     'scrollbar-track-transparent',
     isReadOnly ? 'cursor-default' : 'cursor-text'
   );
@@ -130,8 +130,8 @@ export default function CodeEditor({
     <div
       className={clsx(
         'rounded-md shadow-md h-[80dvh] flex flex-col',
-        'border border-zinc-300 dark:border-zinc-700',
-        'bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50',
+        'border border-slate-300 dark:border-purple-950/90',
+        'bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-50',
         'transition-all duration-200'
       )}
     >

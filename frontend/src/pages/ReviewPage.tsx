@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { CodeReviewProvider, useCodeReview } from '../contexts/CodeReviewContext';
 import CodeEditor from '../components/code/CodeEditor';
 import GetReviewButton from '@/components/common/GetReviewButton';
+import { motion } from 'framer-motion';
+import { Icons } from '@/styles/icons/Icon';
 
 function ReviewContent() {
   const { user } = useAuth();
@@ -23,46 +25,84 @@ function ReviewContent() {
 
   if (!user) {
     return (
-      <div
-        className={clsx(
-          'p-4 mb-4 text-center rounded-md',
-          'dark:bg-amber-900/30 dark:text-amber-200',
-          'bg-yellow-100 text-yellow-800'
-        )}
-      >
-        <p>You need to be logged in to use the code review feature.</p>
-        <GetReviewButton onClick={() => navigate('/login')}>Log In</GetReviewButton>
+      <div className="flex items-center justify-center h-full">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={clsx(
+            'p-6 mx-auto max-w-md text-center rounded-lg shadow-md',
+            'dark:bg-slate-800/90 dark:text-purple-200',
+            'bg-white text-slate-800 border border-purple-600/30',
+            'transition-all duration-300'
+          )}
+        >
+          <Icons
+            name="doorArrowLeft"
+            className={clsx('w-16 h-16 mx-auto mb-4', 'fill-purple-800 dark:fill-purple-400')}
+          />
+          <p className="mb-4 font-light text-md">
+            Please log in or register to use the code review feature
+          </p>
+          <div className="flex justify-center gap-4">
+            <GetReviewButton onClick={() => navigate('/login')}>Log In</GetReviewButton>
+            <GetReviewButton onClick={() => navigate('/register')}>Register</GetReviewButton>
+          </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col w-full gap-2">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex flex-col w-full gap-2 bg-amber"
+    >
       <div className="flex flex-col gap-4 md:flex-row">
-        <div className="w-full md:grow md:max-w-[38dvw]">
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full md:grow md:max-w-[38dvw]"
+        >
           <CodeEditor disabled={isLoading} />
-        </div>
+        </motion.div>
 
-        <div className="flex items-center justify-between">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="flex items-center justify-center"
+        >
           <GetReviewButton onClick={handleSubmit} isLoading={isLoading} loadingText="Analyzing...">
             Get Review
           </GetReviewButton>
-        </div>
+        </motion.div>
 
-        <div className="w-full md:grow md:max-w-[38dvw]">
+        <motion.div
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full md:grow md:max-w-[38dvw]"
+        >
           <CodeFeedback />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function ReviewPage() {
   return (
     <CodeReviewProvider>
-      <div className="container p-4 mx-auto max-w-7xl">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="container p-4 mx-auto max-w-7xl"
+      >
         <ReviewContent />
-      </div>
+      </motion.div>
     </CodeReviewProvider>
   );
 }

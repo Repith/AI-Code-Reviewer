@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { ButtonHTMLAttributes } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface GetReviewButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
@@ -20,12 +21,14 @@ export default function GetReviewButton({
       disabled={isLoading || props.disabled}
       className={clsx(
         'px-4 py-2 rounded font-medium cursor-pointer',
-        'bg-gradient-to-r from-blue-600 to-indigo-600',
-        'hover:from-blue-700 hover:to-indigo-700',
-        'text-white text-xs shadow-md hover:shadow-lg',
+        'bg-gradient-to-r from-purple-700 to-violet-600',
+        'hover:from-purple-600 hover:to-violet-500',
+        'text-white text-xs',
+        'shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40',
         'transform hover:scale-105',
         'disabled:opacity-60 disabled:pointer-events-none',
         'transition-all duration-200',
+        'border border-purple-500/20',
         className
       )}
       {...props}

@@ -1,8 +1,8 @@
-/* Dark theme (zinc palette) - Enhanced */
+/* Dark theme (slate palette) - Enhanced */
 .prism-dark code[class*="language-"],
 .prism-dark pre[class*="language-"] {
-  color: #e4e4e7; /* zinc-200 */
-  background: #27272a; /* zinc-800 */
+  color: #e2e8f0; /* slate-200 */
+  background: #1e293b; /* slate-800 */
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   text-align: left;
   white-space: pre;
@@ -18,12 +18,12 @@
 .prism-dark .token.prolog,
 .prism-dark .token.doctype,
 .prism-dark .token.cdata {
-  color: #a1a1aa; /* zinc-400 */
+  color: #94a3b8; /* slate-400 */
   font-style: italic;
 }
 
 .prism-dark .token.punctuation {
-  color: #d4d4d8; /* zinc-300 */
+  color: #cbd5e1; /* slate-300 */
 }
 
 .prism-dark .token.namespace {
@@ -152,8 +152,8 @@
 /* Light theme - Enhanced */
 .prism-light code[class*="language-"],
 .prism-light pre[class*="language-"] {
-  color: #374151; /* gray-700 */
-  background: #f8f8f8;
+  color: #334155; /* slate-700 */
+  background: #f8fafc; /* slate-50 */
 }
 
 .prism-light .token.comment,
@@ -320,6 +320,7 @@
 .prism-light .token.tag.component {
   color: #ca8a04; /* yellow-600 */
 }
+
 
 
 
