@@ -21,6 +21,7 @@ An AI-powered application that provides instant code reviews and feedback for yo
   <img src="frontend/public/screenshots/shot_3.png" alt="Review History" width="45%" />
 </div>
 
+
 <div align="center">
   <img src="frontend/public/screenshots/shot_4.png" alt="Login Page" width="45%" />
   <img src="frontend/public/screenshots/shot_5.png" alt="Dark Mode" width="45%" />
