@@ -1,0 +1,326 @@
+/* Dark theme (zinc palette) - Enhanced */
+.prism-dark code[class*="language-"],
+.prism-dark pre[class*="language-"] {
+  color: #e4e4e7; /* zinc-200 */
+  background: #27272a; /* zinc-800 */
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+}
+
+.prism-dark .token.comment,
+.prism-dark .token.prolog,
+.prism-dark .token.doctype,
+.prism-dark .token.cdata {
+  color: #a1a1aa; /* zinc-400 */
+  font-style: italic;
+}
+
+.prism-dark .token.punctuation {
+  color: #d4d4d8; /* zinc-300 */
+}
+
+.prism-dark .token.namespace {
+  opacity: 0.7;
+}
+
+/* Enhanced colors for JSX/HTML elements */
+.prism-dark .token.tag {
+  color: #ef4444; /* red-500 - for HTML elements like div, span */
+}
+
+.prism-dark .token.tag .token.punctuation {
+  color: #94a3b8; /* slate-400 */
+}
+
+.prism-dark .token.attr-name {
+  color: #f97316; /* orange-500 - for attributes like className */
+}
+
+.prism-dark .token.attr-value,
+.prism-dark .token.attr-value .token.punctuation {
+  color: #22c55e; /* green-500 - for strings like "prose max-w-none" */
+}
+
+.prism-dark .token.property,
+.prism-dark .token.boolean,
+.prism-dark .token.number,
+.prism-dark .token.constant,
+.prism-dark .token.symbol,
+.prism-dark .token.deleted {
+  color: #93c5fd; /* blue-300 */
+}
+
+.prism-dark .token.selector,
+.prism-dark .token.string,
+.prism-dark .token.char,
+.prism-dark .token.builtin,
+.prism-dark .token.inserted {
+  color: #86efac; /* green-300 */
+}
+
+.prism-dark .token.operator,
+.prism-dark .token.entity,
+.prism-dark .token.url,
+.prism-dark .language-css .token.string,
+.prism-dark .style .token.string {
+  color: #d4d4d8; /* zinc-300 */
+}
+
+.prism-dark .token.atrule,
+.prism-dark .token.keyword {
+  color: #a855f7; /* purple-500 - for keywords like const, return */
+}
+
+/* Component names in JSX/TSX */
+.prism-dark .token.class-name {
+  color: #facc15; /* yellow-500 - for components like ReactMarkdown */
+}
+
+.prism-dark .token.function {
+  color: #3b82f6; /* blue-500 - for functions */
+}
+
+.prism-dark .token.regex,
+.prism-dark .token.important,
+.prism-dark .token.variable {
+  color: #f9a8d4; /* pink-300 */
+}
+
+/* JSX/TSX specific */
+.prism-dark .token.imports,
+.prism-dark .token.exports {
+  color: #a78bfa; /* violet-400 */
+}
+
+.prism-dark .token.parameter {
+  color: #fda4af; /* rose-300 */
+}
+
+.prism-dark .token.important,
+.prism-dark .token.bold {
+  font-weight: bold;
+}
+
+.prism-dark .token.italic {
+  font-style: italic;
+}
+
+.prism-dark .token.entity {
+  cursor: help;
+}
+
+/* Line numbers for dark theme */
+.prism-dark .line-numbers-rows > span:before {
+  color: #71717a; /* zinc-500 */
+}
+
+.prism-dark .line-numbers-rows {
+  border-right: 1px solid #52525b; /* zinc-600 */
+}
+
+/* Custom scrollbars for dark theme */
+.prism-dark::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.prism-dark::-webkit-scrollbar-track {
+  background: #18181b; /* zinc-900 */
+}
+
+.prism-dark::-webkit-scrollbar-thumb {
+  background: #52525b; /* zinc-600 */
+  border-radius: 4px;
+}
+
+.prism-dark::-webkit-scrollbar-thumb:hover {
+  background: #71717a; /* zinc-500 */
+}
+
+.prism-dark {
+  scrollbar-width: thin;
+  scrollbar-color: #52525b #18181b; /* zinc-600 and zinc-900 */
+}
+
+/* Light theme - Enhanced */
+.prism-light code[class*="language-"],
+.prism-light pre[class*="language-"] {
+  color: #374151; /* gray-700 */
+  background: #f8f8f8;
+}
+
+.prism-light .token.comment,
+.prism-light .token.prolog,
+.prism-light .token.doctype,
+.prism-light .token.cdata {
+  color: #65a30d; /* lime-600 */
+  font-style: italic;
+}
+
+.prism-light .token.punctuation {
+  color: #6b7280; /* gray-500 */
+}
+
+/* Enhanced colors for JSX/HTML elements */
+.prism-light .token.tag {
+  color: #ef4444; /* red-500 - for HTML elements like div, span */
+}
+
+.prism-light .token.tag .token.punctuation {
+  color: #64748b; /* slate-500 */
+}
+
+.prism-light .token.attr-name {
+  color: #f97316; /* orange-500 - for attributes like className */
+}
+
+.prism-light .token.attr-value,
+.prism-light .token.attr-value .token.punctuation {
+  color: #16a34a; /* green-600 - for strings like "prose max-w-none" */
+}
+
+.prism-light .token.property,
+.prism-light .token.boolean,
+.prism-light .token.number,
+.prism-light .token.constant,
+.prism-light .token.symbol,
+.prism-light .token.deleted {
+  color: #2563eb; /* blue-600 */
+}
+
+.prism-light .token.selector,
+.prism-light .token.string,
+.prism-light .token.char,
+.prism-light .token.builtin,
+.prism-light .token.inserted {
+  color: #16a34a; /* green-600 */
+}
+
+.prism-light .token.operator,
+.prism-light .token.entity,
+.prism-light .token.url,
+.prism-light .language-css .token.string,
+.prism-light .style .token.string {
+  color: #6b7280; /* gray-500 */
+}
+
+.prism-light .token.atrule,
+.prism-light .token.keyword {
+  color: #9333ea; /* purple-600 - for keywords like const, return */
+}
+
+/* Component names in JSX/TSX */
+.prism-light .token.class-name {
+  color: #ca8a04; /* yellow-600 - for components like ReactMarkdown */
+}
+
+.prism-light .token.function {
+  color: #2563eb; /* blue-600 - for functions */
+}
+
+.prism-light .token.regex,
+.prism-light .token.important,
+.prism-light .token.variable {
+  color: #ec4899; /* pink-500 */
+}
+
+/* JSX/TSX specific */
+.prism-light .token.imports,
+.prism-light .token.exports {
+  color: #8b5cf6; /* violet-500 */
+}
+
+.prism-light .token.parameter {
+  color: #f43f5e; /* rose-500 */
+}
+
+/* Line numbers for both themes */
+.prism-light .line-numbers-rows > span:before,
+.prism-dark .line-numbers-rows > span:before {
+  color: #858585;
+}
+
+.prism-light .line-numbers-rows,
+.prism-dark .line-numbers-rows {
+  border-right: 1px solid #ddd;
+}
+
+/* Custom scrollbars for light theme */
+.prism-light::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.prism-light::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.prism-light::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.prism-light::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Custom scrollbars for dark theme */
+.prism-dark::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.prism-dark::-webkit-scrollbar-track {
+  background: #18181b; /* zinc-900 */
+}
+
+.prism-dark::-webkit-scrollbar-thumb {
+  background: #52525b; /* zinc-600 */
+  border-radius: 4px;
+}
+
+.prism-dark::-webkit-scrollbar-thumb:hover {
+  background: #71717a; /* zinc-500 */
+}
+
+/* For Firefox */
+.prism-light, .prism-dark {
+  scrollbar-width: thin;
+}
+
+.prism-light {
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.prism-dark {
+  scrollbar-color: #52525b #18181b; /* zinc-600 and zinc-900 */
+}
+
+/* JSX specific enhancements */
+.prism-dark .token.punctuation.jsx-bracket {
+  color: #94a3b8; /* slate-400 */
+}
+
+.prism-light .token.punctuation.jsx-bracket {
+  color: #64748b; /* slate-500 */
+}
+
+/* Make component tags more distinctive */
+.prism-dark .token.tag.component {
+  color: #facc15; /* yellow-500 */
+}
+
+.prism-light .token.tag.component {
+  color: #ca8a04; /* yellow-600 */
+}
+
+
+
+

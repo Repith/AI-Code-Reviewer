@@ -15,11 +15,12 @@
     "format": "concurrently \"npm run format:backend\" \"npm run format:frontend\"",
     "format:backend": "cd backend && npm run format",
     "format:frontend": "cd frontend && npm run format",
-    "update-deps": "concurrently \"npm run update-deps:backend\" \"npm run update-deps:frontend\"",
-    "update-deps:backend": "cd backend && npm update",
-    "update-deps:frontend": "cd frontend && npm update"
+    "update-deps": "npm update && concurrently \"npm run update-deps:backend\" \"npm run update-deps:frontend\"",
+    "update-deps:backend": "cd backend && npm run update-deps",
+    "update-deps:frontend": "cd frontend && npm run update-deps"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
 }
+

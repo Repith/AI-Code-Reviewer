@@ -24,10 +24,10 @@ export default function CopyButton({ textToCopy, className, disabled = false }: 
       onClick={handleCopy}
       disabled={disabled}
       className={clsx(
-        'p-1 rounded text-xs cursor-pointer',
+        'px-1.5 py-1 rounded text-xs cursor-pointer',
         copied
-          ? 'bg-green-500 text-white'
-          : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200',
+          ? 'bg-green-600 text-white'
+          : 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200',
         'hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors',
         disabled && 'opacity-50',
         className

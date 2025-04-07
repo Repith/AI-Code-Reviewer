@@ -1,15 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import Prism from 'prismjs';
 import clsx from 'clsx';
 import CopyButton from '../common/CopyButton';
+import 'prismjs/prism';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-import '../../styles/prism-vscode-dark.css';
+import '@/styles/themes/prism-theme.css';
 import { useCodeReview } from '../../contexts/CodeReviewContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface CodeEditorProps {
   disabled?: boolean;
@@ -24,6 +26,8 @@ export default function CodeEditor({
 }: CodeEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const preRef = useRef<HTMLPreElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const { theme } = useTheme();
   const {
     code: contextCode,
     setCode: setContextCode,
@@ -31,78 +35,107 @@ export default function CodeEditor({
     setLanguage: setContextLanguage,
   } = useCodeReview();
 
-  // Use props if provided, otherwise use context values
   const code = initialCode !== undefined ? initialCode : contextCode;
   const language = initialLanguage !== undefined ? initialLanguage : contextLanguage;
+  const isReadOnly = disabled || initialCode !== undefined;
 
-  // Only update context if we're not using prop values
-  const setCode = initialCode !== undefined ? () => {} : setContextCode;
+  const sharedStyles = useMemo(
+    () => ({
+      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+      fontSize: '0.8rem',
+      lineHeight: '1.5',
+      tabSize: 2,
+      margin: 0,
+      overflow: 'auto',
+      whiteSpace: 'pre',
+    }),
+    []
+  );
 
   const detectLanguage = (text: string): 'javascript' | 'typescript' | null => {
     const tsPattern = /interface\s+\w+|type\s+\w+\s*=|:\s*\w+/;
     const jsPattern = /import\s+React|ReactDOM|className=/;
-    if (tsPattern.test(text)) return 'typescript';
-    if (jsPattern.test(text)) return 'javascript';
-    return null;
+    return tsPattern.test(text) ? 'typescript' : jsPattern.test(text) ? 'javascript' : null;
   };
 
   useEffect(() => {
-    if (preRef.current) {
-      try {
-        preRef.current.innerHTML = '';
-        const codeElement = document.createElement('code');
-        codeElement.className = `language-${language} line-numbers`;
-        codeElement.textContent = code.endsWith('\n') ? code : code + '\n';
-        preRef.current.appendChild(codeElement);
-        Prism.highlightElement(codeElement);
-      } catch (error) {
-        console.error('Highlighting error:', error);
-      }
-    }
-  }, [code, language]);
+    if (!preRef.current) return;
 
-  const syncScroll = () => {
-    if (textareaRef.current && preRef.current) {
-      preRef.current.scrollTop = textareaRef.current.scrollTop;
-      preRef.current.scrollLeft = textareaRef.current.scrollLeft;
+    try {
+      preRef.current.innerHTML = '';
+      const codeElement = document.createElement('code');
+      codeElement.className = `language-${language} line-numbers`;
+      codeElement.textContent = code.endsWith('\n') ? code : code + '\n';
+      preRef.current.appendChild(codeElement);
+      Prism.highlightElement(codeElement);
+    } catch (error) {
+      console.error('Highlighting error:', error);
     }
-  };
+  }, [code, language, theme]);
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    const pre = preRef.current;
+    if (!textarea || !pre) return;
+
+    const handleScroll = () => {
+      pre.scrollTop = textarea.scrollTop;
+      pre.scrollLeft = textarea.scrollLeft;
+    };
+
+    textarea.addEventListener('scroll', handleScroll);
+    return () => textarea.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handlePaste = (e: React.ClipboardEvent) => {
-    if (initialCode !== undefined) return; // Don't handle paste if using prop values
+    if (isReadOnly) return;
 
     e.preventDefault();
     const pastedText = e.clipboardData.getData('text');
     const detected = detectLanguage(pastedText);
-    if (detected) {
-      setContextLanguage(detected);
-    }
+    if (detected) setContextLanguage(detected);
     setContextCode(pastedText);
   };
 
-  const sharedStyles: React.CSSProperties = {
-    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-    fontSize: '12px',
-    lineHeight: '1.5',
-    tabSize: 2,
-  };
+  const headerClasses = clsx(
+    'flex items-center justify-between px-4 py-2 rounded-t-lg',
+    'bg-zinc-200 dark:bg-zinc-900 border-b border-zinc-300 dark:border-zinc-800',
+    'h-10'
+  );
 
-  const isReadOnly = disabled || initialCode !== undefined;
+  const wrapperClasses = clsx(
+    'relative flex-grow overflow-hidden rounded-b-lg',
+    theme === 'dark' ? 'bg-zinc-800' : 'bg-[#f8f8f8]'
+  );
+
+  const preClasses = clsx(
+    'absolute top-0 left-0 w-full h-full pointer-events-none line-numbers',
+    `prism-${theme}`,
+    'scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700',
+    'scrollbar-track-transparent'
+  );
+
+  const textareaClasses = clsx(
+    'absolute top-0 left-0 w-full h-full',
+    'pl-[2.85rem]',
+    'bg-transparent resize-none',
+    'caret-black dark:caret-white',
+    'focus:outline-none focus:ring-0',
+    'scrollbar-thin scrollbar-thumb-zinc-400 dark:scrollbar-thumb-zinc-700',
+    'scrollbar-track-transparent',
+    isReadOnly ? 'cursor-default' : 'cursor-text'
+  );
 
   return (
     <div
       className={clsx(
-        'rounded-md border shadow-sm overflow-hidden h-[70dvh] flex flex-col',
-        'bg-zinc-950 dark:bg-zinc-950 text-zinc-50',
+        'rounded-md shadow-md h-[70dvh] flex flex-col',
+        'border border-zinc-300 dark:border-zinc-700',
+        'bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50',
         'transition-all duration-200'
       )}
     >
-      <div
-        className={clsx(
-          'flex items-center justify-between px-4 py-2',
-          'bg-zinc-900 dark:bg-zinc-900 border-b border-zinc-800'
-        )}
-      >
+      <div className={headerClasses}>
         <div className="flex items-center gap-2">
           <div
             className={clsx(
@@ -110,33 +143,22 @@ export default function CodeEditor({
               language === 'javascript' ? 'bg-yellow-400' : 'bg-blue-400'
             )}
           />
-          <span className="text-sm font-medium">
+          <span className="text-xs font-medium">
             {language === 'javascript' ? 'JavaScript' : 'TypeScript'}
           </span>
         </div>
         <CopyButton textToCopy={code} disabled={disabled} />
       </div>
-      <div className="relative flex-grow bg-[#1e1e1e]">
-        <pre
-          ref={preRef}
-          className="absolute top-0 left-0 w-full h-full overflow-auto pointer-events-none line-numbers"
-          style={{ ...sharedStyles }}
-        ></pre>
+      <div ref={wrapperRef} className={wrapperClasses}>
+        <pre ref={preRef} className={preClasses} style={sharedStyles}></pre>
         <textarea
           ref={textareaRef}
           value={code}
-          onChange={e => initialCode === undefined && setContextCode(e.target.value)}
-          onScroll={syncScroll}
+          onChange={e => !isReadOnly && setContextCode(e.target.value)}
           onPaste={handlePaste}
           readOnly={isReadOnly}
-          className={clsx(
-            'absolute top-0 left-0 w-full h-full',
-            'overflow-auto bg-transparent resize-none',
-            'caret-white pl-[2.85rem] pr-2',
-            'focus:outline-none focus:ring-0',
-            isReadOnly ? 'cursor-default' : 'cursor-text'
-          )}
-          style={{ ...sharedStyles, whiteSpace: 'pre', color: 'transparent' }}
+          className={textareaClasses}
+          style={{ ...sharedStyles, color: 'transparent' }}
           spellCheck="false"
           placeholder="Paste or type your code here..."
         />
